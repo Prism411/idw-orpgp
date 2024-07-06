@@ -1,0 +1,12 @@
+<%# app/views/dashboard/index.html.erb %>
+
+<h1>Dashboard</h1>
+<%= link_to 'Create New Campaign', new_campaign_path, class: 'btn btn-primary' %>
+
+<%# Lista de campanhas do usuário logado %>
+<h2>Your Campaigns</h2>
+<ul>
+  <% current_user.campaigns.each do |campaign| %>
+    <li><%= link_to campaign.title, campaign_path(campaign) %></li>
+  <% end %>
+</ul>
