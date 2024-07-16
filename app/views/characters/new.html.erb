@@ -1,0 +1,81 @@
+<h1>New Character</h1>
+
+<%= form_with(model: [ @campaign, @character ]) do |form| %>
+  <% if @character.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@character.errors.count, "error") %> prohibited this character from being saved:</h2>
+
+      <ul>
+        <% @character.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :history %>
+    <%= form.text_area :history %>
+  </div>
+
+  <div class="field">
+    <%= form.label :height %>
+    <%= form.number_field :height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :intelligence %>
+    <%= form.number_field :intelligence %>
+  </div>
+
+  <div class="field">
+    <%= form.label :strength %>
+    <%= form.number_field :strength %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dexterity %>
+    <%= form.number_field :dexterity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :charisma %>
+    <%= form.number_field :charisma %>
+  </div>
+
+  <div class="field">
+    <%= form.label :constitution %>
+    <%= form.number_field :constitution %>
+  </div>
+
+  <div class="field">
+    <%= form.label :life %>
+    <%= form.number_field :life %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mana %>
+    <%= form.number_field :mana %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.check_box :status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', campaign_characters_path(@campaign) %>

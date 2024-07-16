@@ -3,10 +3,24 @@
 <h1>Dashboard</h1>
 <%= link_to 'Create New Campaign', new_campaign_path, class: 'btn btn-primary' %>
 
-<%# Lista de campanhas do usuário logado %>
-<h2>Your Campaigns</h2>
-<ul>
-  <% current_user.campaigns.each do |campaign| %>
-    <li><%= link_to campaign.title, campaign_path(campaign) %></li>
-  <% end %>
+<%# Abas para campanhas do usuário e outras campanhas %>
+<ul class="nav nav-tabs" id="campaignTabs" role="tablist">
 </ul>
+<div class="tab-content" id="campaignTabsContent">
+  <div class="tab-pane fade show active" id="user-campaigns" role="tabpanel" aria-labelledby="user-campaigns-tab">
+    <h2>Your Campaigns</h2>
+    <ul>
+      <% current_user.campaigns.each do |campaign| %>
+        <li><%= link_to campaign.title, campaign_path(campaign) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="tab-pane fade" id="available-campaigns" role="tabpanel" aria-labelledby="available-campaigns-tab">
+    <h2>Available Campaigns</h2>
+    <ul>
+      <% Campaign.where.not(user: current_user).each do |campaign| %>
+        <li><%= link_to campaign.title, campaign_path(campaign) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

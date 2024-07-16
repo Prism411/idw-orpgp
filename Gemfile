@@ -11,6 +11,11 @@ gem 'omniauth-rails_csrf_protection'
 gem "sprockets-rails"
 gem 'pg'
 
+gem 'bootstrap', '~> 5.1.3'
+gem 'jquery-rails'
+# Gemfile
+gem 'webpacker'
+
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
 

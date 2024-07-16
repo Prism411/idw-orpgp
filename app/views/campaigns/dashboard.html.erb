@@ -1,0 +1,11 @@
+<h1><%= @campaign.title %> - Dashboard</h1>
+
+<p>
+  <%= link_to 'Mestrar Campanha', master_campaign_campaign_path(@campaign), class: 'btn btn-primary' %>
+</p>
+<p>
+  <%= link_to 'Editar Campanha', edit_campaign_path(@campaign), class: 'btn btn-secondary' %>
+</p>
+<p>
+  <%= link_to 'Exibir Personagens da Campanha', campaign_characters_campaign_path(@campaign), class: 'btn btn-info' %>
+</p>
