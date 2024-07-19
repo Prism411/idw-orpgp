@@ -13,6 +13,7 @@ class CreateCharacters < ActiveRecord::Migration[7.1]
       t.integer :life
       t.integer :mana
       t.boolean :status
+      t.boolean :ready
       t.references :campaign, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
 

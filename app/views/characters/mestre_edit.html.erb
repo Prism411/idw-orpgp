@@ -1,10 +1,9 @@
-<h1>New Character</h1>
+<h1>Edit Character</h1>
 
-<%= form_with(model: [ @campaign, @character ]) do |form| %>
+<%= form_with(model: [@campaign, @character], local: true) do |form| %>
   <% if @character.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@character.errors.count, "error") %> prohibited this character from being saved:</h2>
-
       <ul>
         <% @character.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -29,9 +28,9 @@
   </div>
 
   <div class="field">
-  <%= form.label :height %>
-  <%= form.number_field :height, step: :any, min: 0 %>
-</div>
+    <%= form.label :height %>
+    <%= form.number_field :height, step: :any, min: 0, max: 2.00 %>
+  </div>
 
   <div class="field">
     <%= form.label :intelligence %>
@@ -71,6 +70,11 @@
   <div class="field">
     <%= form.label :status %>
     <%= form.check_box :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ready %>
+    <%= form.check_box :ready %>
   </div>
 
   <div class="actions">

@@ -1,5 +1,6 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+// config/webpack/test.js
+process.env.NODE_ENV = process.env.NODE_ENV || 'test';
 
-const environment = require('./environment')
+const environment = require('./environment');
 
-module.exports = environment.toWebpackConfig()
+module.exports = environment.toWebpackConfig();

@@ -1,13 +1,18 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_campaign, only: %i[show edit update destroy dashboard master characters]
+  before_action :set_campaign, only: %i[show edit update destroy dashboard master characters player_dashboard]
 
   def index
-    @campaigns = current_user.campaigns
+    @user_campaigns = current_user.campaigns.to_a
+    @available_campaigns = Campaign.where.not(user: current_user).to_a
   end
 
   def show
-    redirect_to dashboard_campaign_path(@campaign)
+    if @campaign.user == current_user
+      redirect_to dashboard_campaign_path(@campaign)
+    else
+      redirect_to player_dashboard_campaign_path(@campaign)
+    end
   end
 
   def new
@@ -53,22 +58,17 @@ class CampaignsController < ApplicationController
   end
 
   def player_dashboard
-    @campaign = find_campaign
-    # Lógica para exibir o dashboard do jogador
+    @characters = @campaign.characters
+    # Qualquer outra lógica necessária para o player_dashboard
   end
 
   private
 
   def set_campaign
-    @campaign = current_user.campaigns.find_by(id: params[:id])
-    unless @campaign
-      @campaign = find_campaign
-      redirect_to player_dashboard_path(@campaign) and return unless @campaign.user_id == current_user.id
+    @campaign = Campaign.find(params[:id])
+    if @campaign.user != current_user && action_name != 'player_dashboard'
+      redirect_to player_dashboard_campaign_path(@campaign) and return
     end
-  end
-
-  def find_campaign
-    Campaign.find(params[:id])
   end
 
   def campaign_params

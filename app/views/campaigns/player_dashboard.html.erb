@@ -1,9 +1,21 @@
-<h1><%= @campaign.title %></h1>
-<p><%= @campaign.description %></p>
-<h2>Personagens</h2>
+<% if params[:ready_alert] %>
+  <script>
+    alert('Character is ready and cannot be edited by players.');
+  </script>
+<% end %>
+
+<h1>Personagens da Campanha: <%= @campaign.title %></h1>
+
 <ul>
-  <% @campaign.characters.each do |character| %>
-    <li><%= character.name %></li>
+  <% if @characters.present? %>
+    <% @characters.each do |character| %>
+      <li>
+        <%= character.name %> - <%= character.description %>
+        <%= link_to 'Edit', edit_campaign_character_path(@campaign, character) %>
+      </li>
+    <% end %>
+  <% else %>
+    <li>Nenhum personagem encontrado.</li>
   <% end %>
 </ul>
 <%= link_to 'Criar novo personagem', new_campaign_character_path(@campaign) %>

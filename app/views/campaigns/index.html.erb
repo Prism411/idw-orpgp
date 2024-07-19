@@ -1,11 +1,30 @@
-<h1>Minhas Campanhas</h1>
+<%# app/views/dashboard/index.html.erb %>
 
-<ul>
-  <% @campaigns.each do |campaign| %>
-    <li>
-      <%= link_to campaign.title, dashboard_campaign_path(campaign) %>
-    </li>
-  <% end %>
-</ul>
+<h1>Dashboard</h1>
+<%= link_to 'Create New Campaign', new_campaign_path, class: 'btn btn-primary' %>
 
-<%= link_to 'Nova Campanha', new_campaign_path, class: 'btn btn-primary' %>
+<div>
+  <h2>Your Campaigns</h2>
+  <ul>
+    <% if @user_campaigns.present? %>
+      <% @user_campaigns.each do |campaign| %>
+        <li><%= link_to campaign.title, campaign_path(campaign) %></li>
+      <% end %>
+    <% else %>
+      <li>No campaigns found.</li>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <h2>Available Campaigns</h2>
+  <ul>
+    <% if @available_campaigns.present? %>
+      <% @available_campaigns.each do |campaign| %>
+        <li><%= link_to campaign.title, campaign_path(campaign) %></li>
+      <% end %>
+    <% else %>
+      <li>No available campaigns.</li>
+    <% end %>
+  </ul>
+</div>
